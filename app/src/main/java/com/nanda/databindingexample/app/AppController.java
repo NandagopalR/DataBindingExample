@@ -1,13 +1,14 @@
 package com.nanda.databindingexample.app;
 
-import android.app.Application;
-
+import com.nanda.databindingexample.data.di.componants.DaggerAppComponant;
 import com.nanda.databindingexample.data.factory.RealmConfigurationFactory;
 
+import dagger.android.AndroidInjector;
+import dagger.android.support.DaggerApplication;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
-public class AppController extends Application {
+public class AppController extends DaggerApplication {
 
     private static AppController appController;
 
@@ -30,4 +31,8 @@ public class AppController extends Application {
         } else return realmConfiguration;
     }
 
+    @Override
+    protected AndroidInjector<? extends AppController> applicationInjector() {
+        return DaggerAppComponant.builder().create(this);
+    }
 }
