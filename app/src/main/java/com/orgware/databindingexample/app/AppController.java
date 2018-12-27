@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.orgware.databindingexample.data.factory.RealmConfigurationFactory;
 
+import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 public class AppController extends Application {
@@ -16,6 +17,7 @@ public class AppController extends Application {
     public void onCreate() {
         super.onCreate();
         appController = this;
+        Realm.init(this);
     }
 
     public static AppController getInstance() {
