@@ -5,7 +5,7 @@
 
     <group android:checkableBehavior="none">
         <item
-            android:id="@+id/nav_garder"
+            android:id="@+id/nav_garden"
             android:icon="@drawable/ic_my_garden"
             android:title="My Garden" />
         <item

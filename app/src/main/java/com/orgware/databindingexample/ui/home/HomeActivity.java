@@ -11,9 +11,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.orgware.databindingexample.R;
+import com.orgware.databindingexample.app.AppController;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -27,6 +29,8 @@ public class HomeActivity extends AppCompatActivity
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
 
+    private Realm realm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +42,8 @@ public class HomeActivity extends AppCompatActivity
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        realm = Realm.getInstance(AppController.getInstance().getRealmConfiguration());
 
         navigationView.setNavigationItemSelectedListener(this);
     }
@@ -58,7 +64,7 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_garder) {
+        if (id == R.id.nav_garden) {
 
         } else if (id == R.id.nav_plant_list) {
 
