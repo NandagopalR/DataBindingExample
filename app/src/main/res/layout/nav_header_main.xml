@@ -19,7 +19,7 @@
         android:layout_gravity="center_horizontal"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@drawable/ic_plants" />
+        app:srcCompat="@drawable/ic_library" />
 
     <TextView
         android:layout_width="wrap_content"

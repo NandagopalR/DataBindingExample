@@ -5,13 +5,13 @@
 
     <group android:checkableBehavior="none">
         <item
-            android:id="@+id/nav_garden"
-            android:icon="@drawable/ic_my_garden"
-            android:title="My Garden" />
+            android:id="@+id/nav_books"
+            android:icon="@drawable/ic_my_book"
+            android:title="@string/my_book" />
         <item
-            android:id="@+id/nav_plant_list"
-            android:icon="@drawable/ic_plant_list"
-            android:title="Plant List" />
+            android:id="@+id/nav_books_list"
+            android:icon="@drawable/ic_books_list"
+            android:title="@string/books_list" />
     </group>
 
 </menu>
