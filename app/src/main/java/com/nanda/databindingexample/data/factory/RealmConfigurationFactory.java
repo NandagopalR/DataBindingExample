@@ -1,8 +1,7 @@
-package com.orgware.databindingexample.data.factory;
+package com.nanda.databindingexample.data.factory;
 
-import com.orgware.databindingexample.app.AppConstants;
-import com.orgware.databindingexample.data.dbmodels.PlantModel;
-import com.orgware.databindingexample.data.dbmodules.PlantModule;
+import com.nanda.databindingexample.app.AppConstants;
+import com.nanda.databindingexample.data.dbmodules.PlantModule;
 
 import io.realm.RealmConfiguration;
 

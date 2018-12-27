@@ -1,8 +1,8 @@
-package com.orgware.databindingexample.app;
+package com.nanda.databindingexample.app;
 
 import android.app.Application;
 
-import com.orgware.databindingexample.data.factory.RealmConfigurationFactory;
+import com.nanda.databindingexample.data.factory.RealmConfigurationFactory;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;

@@ -1,4 +1,4 @@
-package com.orgware.databindingexample;
+package com.nanda.databindingexample;
 
 import org.junit.Test;
 

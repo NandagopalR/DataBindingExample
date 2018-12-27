@@ -1,10 +1,10 @@
-package com.orgware.databindingexample.base;
+package com.nanda.databindingexample.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.orgware.databindingexample.R;
+import com.nanda.databindingexample.R;
 
 public class BaseActivity extends AppCompatActivity {
 

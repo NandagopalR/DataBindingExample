@@ -1,13 +1,13 @@
-package com.orgware.databindingexample.ui.splash;
+package com.nanda.databindingexample.ui.splash;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 
-import com.orgware.databindingexample.R;
-import com.orgware.databindingexample.base.BaseActivity;
-import com.orgware.databindingexample.ui.home.HomeActivity;
+import com.nanda.databindingexample.R;
+import com.nanda.databindingexample.base.BaseActivity;
+import com.nanda.databindingexample.ui.home.HomeActivity;
 
 public class SplashActivity extends BaseActivity {
 

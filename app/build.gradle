@@ -4,7 +4,7 @@ apply plugin: 'realm-android'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.orgware.databindingexample"
+        applicationId "com.nanda.databindingexample"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1

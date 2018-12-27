@@ -1,4 +1,4 @@
-package com.orgware.databindingexample.app;
+package com.nanda.databindingexample.app;
 
 public class AppConstants {
 

@@ -1,4 +1,4 @@
-package com.orgware.databindingexample.ui.home;
+package com.nanda.databindingexample.ui.home;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -9,9 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.orgware.databindingexample.R;
-import com.orgware.databindingexample.app.AppController;
-import com.orgware.databindingexample.base.BaseActivity;
+import com.nanda.databindingexample.R;
+import com.nanda.databindingexample.app.AppController;
+import com.nanda.databindingexample.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

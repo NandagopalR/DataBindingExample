@@ -1,4 +1,4 @@
-package com.orgware.databindingexample;
+package com.nanda.databindingexample;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.orgware.databindingexample", appContext.getPackageName());
+        assertEquals("com.nanda.databindingexample", appContext.getPackageName());
     }
 }
