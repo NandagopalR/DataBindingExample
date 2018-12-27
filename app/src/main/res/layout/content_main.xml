@@ -8,6 +8,19 @@
     tools:context=".ui.home.HomeActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <TextView
+        android:id="@+id/tv_no_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Data Found"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="0dp"
