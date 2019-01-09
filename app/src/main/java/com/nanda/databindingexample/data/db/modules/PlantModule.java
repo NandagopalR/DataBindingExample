@@ -1,6 +1,6 @@
-package com.nanda.databindingexample.data.dbmodules;
+package com.nanda.databindingexample.data.db.modules;
 
-import com.nanda.databindingexample.data.dbmodels.PlantModel;
+import com.nanda.databindingexample.data.db.models.PlantModel;
 
 import io.realm.annotations.RealmModule;
 

@@ -9,24 +9,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.nanda.databindingexample.R;
-import com.nanda.databindingexample.app.AppController;
 import com.nanda.databindingexample.base.BaseActivity;
-import com.nanda.databindingexample.data.viewmodels.ListBooksModel;
+import com.nanda.databindingexample.data.preferences.AppPreference;
+import com.nanda.databindingexample.data.viewmodels.BookListViewModel;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.Realm;
 
 public class HomeActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String TAG = "";
+    private static final String TAG = "HomeActivity";
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -36,14 +36,16 @@ public class HomeActivity extends BaseActivity
     NavigationView navigationView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+    @BindView(R.id.tv_no_data)
+    TextView tvNoData;
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
-    @BindView(R.id.tv_no_data)
-    TextView tvNoData;
-    private ListBooksModel viewModel;
+    @Inject
+    AppPreference appPreference;
+    @Inject
+    BookListViewModel viewModel;
 
-    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,15 +60,14 @@ public class HomeActivity extends BaseActivity
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        realm = Realm.getInstance(AppController.getInstance().getRealmConfiguration());
-
         navigationView.setNavigationItemSelectedListener(this);
 
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ListBooksModel.class);
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(BookListViewModel.class);
 
         try {
             String data = viewModel.getData();
             tvNoData.setText(data);
+            Log.e(TAG, " - " + appPreference.isLoggedIn());
         } catch (Exception e) {
             e.printStackTrace();
         }

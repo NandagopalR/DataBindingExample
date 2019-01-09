@@ -1,13 +1,19 @@
 package com.nanda.databindingexample.data.factory;
 
 import com.nanda.databindingexample.app.AppConstants;
-import com.nanda.databindingexample.data.dbmodules.PlantModule;
+import com.nanda.databindingexample.data.db.modules.PlantModule;
+
+import javax.inject.Inject;
 
 import io.realm.RealmConfiguration;
 
 public class RealmConfigurationFactory {
 
-    public static RealmConfiguration createRealmConfiguration() {
+    @Inject
+    public RealmConfigurationFactory() {
+    }
+
+    public RealmConfiguration createRealmConfiguration() {
         return new RealmConfiguration
                 .Builder()
                 .deleteRealmIfMigrationNeeded()

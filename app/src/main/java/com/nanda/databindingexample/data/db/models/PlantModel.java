@@ -1,4 +1,4 @@
-package com.nanda.databindingexample.data.dbmodels;
+package com.nanda.databindingexample.data.db.models;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

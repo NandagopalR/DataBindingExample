@@ -5,7 +5,7 @@ import android.arch.lifecycle.ViewModelProvider;
 
 import com.nanda.databindingexample.data.di.keys.ViewModelKey;
 import com.nanda.databindingexample.data.factory.ViewModelFactory;
-import com.nanda.databindingexample.data.viewmodels.ListBooksModel;
+import com.nanda.databindingexample.data.viewmodels.BookListViewModel;
 
 import dagger.Binds;
 import dagger.Module;
@@ -16,8 +16,8 @@ public interface ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(ListBooksModel.class)
-    ViewModel bindListBooksModel(ListBooksModel booksModel);
+    @ViewModelKey(BookListViewModel.class)
+    ViewModel bindListBooksModel(BookListViewModel booksModel);
 
     @Binds
     ViewModelProvider.Factory bindViewModelFactory(ViewModelFactory factory);
