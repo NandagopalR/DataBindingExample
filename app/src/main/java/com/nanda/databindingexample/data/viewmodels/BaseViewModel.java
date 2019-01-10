@@ -3,7 +3,6 @@ package com.nanda.databindingexample.data.viewmodels;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.nanda.databindingexample.data.factory.RealmConfigurationFactory;
 import com.nanda.databindingexample.data.preferences.AppPreference;
 import com.nanda.databindingexample.data.repo.AppRepo;
 import com.nanda.databindingexample.data.response.common.AppResponse;
@@ -14,9 +13,6 @@ public abstract class BaseViewModel<T> extends ViewModel {
 
     @Inject
     AppRepo appRepo;
-
-    @Inject
-    RealmConfigurationFactory realmConfigurationFactory;
 
     @Inject
     AppPreference appPreference;

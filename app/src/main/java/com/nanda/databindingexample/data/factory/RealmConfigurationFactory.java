@@ -9,11 +9,7 @@ import io.realm.RealmConfiguration;
 
 public class RealmConfigurationFactory {
 
-    @Inject
-    public RealmConfigurationFactory() {
-    }
-
-    public RealmConfiguration createRealmConfiguration() {
+    public static RealmConfiguration createRealmConfiguration() {
         return new RealmConfiguration
                 .Builder()
                 .deleteRealmIfMigrationNeeded()

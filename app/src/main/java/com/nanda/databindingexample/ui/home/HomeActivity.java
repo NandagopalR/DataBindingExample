@@ -43,8 +43,8 @@ public class HomeActivity extends BaseActivity
     ViewModelProvider.Factory viewModelFactory;
     @Inject
     AppPreference appPreference;
-    @Inject
-    BookListViewModel viewModel;
+
+    private BookListViewModel viewModel;
 
 
     @Override

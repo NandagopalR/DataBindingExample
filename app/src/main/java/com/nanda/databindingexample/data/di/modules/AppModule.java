@@ -31,14 +31,9 @@ public class AppModule {
 
     @Provides
     @Singleton
-    RealmConfiguration providesRealmConfiguration() {
-        return new RealmConfigurationFactory().createRealmConfiguration();
-    }
-
-    @Provides
-    @Singleton
     AppRepo providesAppRepo(AppApi appApi) {
-        return new AppRepo(appApi);
+        RealmConfiguration realmConfiguration = RealmConfigurationFactory.createRealmConfiguration();
+        return new AppRepo(appApi, realmConfiguration);
     }
 
 }

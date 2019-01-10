@@ -3,7 +3,6 @@ package com.nanda.databindingexample.data.repo;
 import com.nanda.databindingexample.app.AppConstants;
 import com.nanda.databindingexample.data.api.ApiConstants;
 import com.nanda.databindingexample.data.api.AppApi;
-import com.nanda.databindingexample.data.factory.RealmConfigurationFactory;
 import com.nanda.databindingexample.data.response.booklist.BooksModel;
 import com.nanda.databindingexample.utils.RxJavaUtils;
 
@@ -13,23 +12,23 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class AppRepo {
 
     private AppApi api;
+    private RealmConfiguration realmConfiguration;
     private Realm realm;
 
     @Inject
-    RealmConfigurationFactory realmConfigFactory;
-
-    @Inject
-    public AppRepo(AppApi api) {
+    public AppRepo(AppApi api, RealmConfiguration realmConfiguration) {
         this.api = api;
+        this.realmConfiguration = realmConfiguration;
         createRealm();
     }
 
     private void createRealm() {
-        realm = Realm.getInstance(realmConfigFactory.createRealmConfiguration());
+        realm = Realm.getInstance(realmConfiguration);
     }
 
     public Observable<List<BooksModel>> getBooksList(String query) {
