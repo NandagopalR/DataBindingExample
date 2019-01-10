@@ -12,11 +12,12 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import io.realm.RealmConfiguration;
+import io.realm.Realm;
 
 public class AppRepo {
 
     private AppApi api;
+    private Realm realm;
 
     @Inject
     RealmConfigurationFactory realmConfigFactory;
@@ -24,6 +25,11 @@ public class AppRepo {
     @Inject
     public AppRepo(AppApi api) {
         this.api = api;
+        createRealm();
+    }
+
+    private void createRealm() {
+        realm = Realm.getInstance(realmConfigFactory.createRealmConfiguration());
     }
 
     public Observable<List<BooksModel>> getBooksList(String query) {
