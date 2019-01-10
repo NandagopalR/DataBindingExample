@@ -1,8 +1,10 @@
 package com.nanda.databindingexample.ui.home;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -64,6 +66,9 @@ public class HomeActivity extends BaseActivity
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(BookListViewModel.class);
 
+        observeLoadingStatus();
+        observeBookList();
+
         try {
             String data = viewModel.getData();
             tvNoData.setText(data);
@@ -71,7 +76,31 @@ public class HomeActivity extends BaseActivity
         } catch (Exception e) {
             e.printStackTrace();
         }
+        viewModel.getBookList("hint");
 
+    }
+
+    private void observeLoadingStatus() {
+        viewModel.getLoadingStatus().observe(this, new Observer() {
+            @Override
+            public void onChanged(@Nullable Object object) {
+                Boolean isloading = (Boolean) object;
+                if (isloading) {
+                    showLoading();
+                } else {
+                    hideLoading();
+                }
+            }
+        });
+    }
+
+    private void observeBookList() {
+        viewModel.getResponse().observe(this, new Observer() {
+            @Override
+            public void onChanged(@Nullable Object o) {
+
+            }
+        });
     }
 
     @Override
