@@ -11,7 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -73,15 +72,10 @@ public class HomeActivity extends BaseActivity
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(BookListViewModel.class);
 
         observeLoadingStatus();
-//        observeBookList();
+        fetchBookList();
+    }
 
-        try {
-            String data = viewModel.getData();
-            tvNoData.setText(data);
-            Log.e(TAG, " - " + appPreference.isLoggedIn());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void fetchBookList() {
         viewModel.getBookList("hint").observe(this, new Observer<AppResponse>() {
             @Override
             public void onChanged(@Nullable AppResponse response) {
@@ -97,7 +91,6 @@ public class HomeActivity extends BaseActivity
                 }
             }
         });
-
     }
 
     private void observeLoadingStatus() {
