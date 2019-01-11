@@ -1,5 +1,7 @@
 package com.nanda.databindingexample.data.viewmodels;
 
+import android.arch.lifecycle.MutableLiveData;
+
 import com.nanda.databindingexample.data.response.common.AppResponse;
 import com.nanda.databindingexample.utils.RxJavaUtils;
 
@@ -18,18 +20,21 @@ public class BookListViewModel extends BaseViewModel {
         return "";
     }
 
-    public void getBookList(String query) {
+    public MutableLiveData<AppResponse> getBookList(String query) {
+        MutableLiveData<AppResponse> responseLiveData = new MutableLiveData<>();
         appRepo.getBooksList(query)
                 .compose(RxJavaUtils.applyObserverSchedulers())
                 .doOnSubscribe(disposable -> loadingStatus.setValue(true))
                 .doAfterTerminate(() -> loadingStatus.setValue(false))
                 .subscribe(booksModels -> {
-                            response.setValue(AppResponse.success(booksModels));
+                            responseLiveData.setValue(AppResponse.success(booksModels));
+//                            response.setValue(AppResponse.success(booksModels));
                         },
                         throwable -> {
-                            response.setValue(AppResponse.error(throwable));
+                            responseLiveData.setValue(AppResponse.error(throwable));
+//                            response.setValue(AppResponse.error(throwable));
                         });
-
+        return responseLiveData;
     }
 
     public void getTestBookList(String query) {

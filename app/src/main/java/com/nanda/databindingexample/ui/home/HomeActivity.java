@@ -18,7 +18,13 @@ import android.widget.TextView;
 import com.nanda.databindingexample.R;
 import com.nanda.databindingexample.base.BaseActivity;
 import com.nanda.databindingexample.data.preferences.AppPreference;
+import com.nanda.databindingexample.data.response.booklist.BooksModel;
+import com.nanda.databindingexample.data.response.common.AppResponse;
+import com.nanda.databindingexample.data.response.common.ResponseStatus;
 import com.nanda.databindingexample.data.viewmodels.BookListViewModel;
+import com.nanda.databindingexample.utils.UiUtils;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -67,7 +73,7 @@ public class HomeActivity extends BaseActivity
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(BookListViewModel.class);
 
         observeLoadingStatus();
-        observeBookList();
+//        observeBookList();
 
         try {
             String data = viewModel.getData();
@@ -76,7 +82,21 @@ public class HomeActivity extends BaseActivity
         } catch (Exception e) {
             e.printStackTrace();
         }
-        viewModel.getBookList("hint");
+        viewModel.getBookList("hint").observe(this, new Observer<AppResponse>() {
+            @Override
+            public void onChanged(@Nullable AppResponse response) {
+                if (response != null) {
+                    if (response.status == ResponseStatus.SUCCESS) {
+                        List<BooksModel> booksModelList = (List<BooksModel>) response.data;
+                        UiUtils.showToast(HomeActivity.this, "" + booksModelList.size());
+                    } else {
+                        if (response != null && response.status == ResponseStatus.ERROR) {
+                            UiUtils.showToast(HomeActivity.this, response.throwable.getMessage());
+                        }
+                    }
+                }
+            }
+        });
 
     }
 
@@ -90,15 +110,6 @@ public class HomeActivity extends BaseActivity
                 } else {
                     hideLoading();
                 }
-            }
-        });
-    }
-
-    private void observeBookList() {
-        viewModel.getResponse().observe(this, new Observer() {
-            @Override
-            public void onChanged(@Nullable Object o) {
-
             }
         });
     }
