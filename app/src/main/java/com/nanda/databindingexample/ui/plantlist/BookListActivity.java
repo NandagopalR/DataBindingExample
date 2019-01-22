@@ -78,6 +78,7 @@ public class BookListActivity extends BaseActivity implements BookListAdapter.Bo
     @Override
     public void onAddBook(BooksModel model) {
         viewModel.saveBookModel(model).subscribe(() -> {
+            UiUtils.showToast(BookListActivity.this, "Book Saved");
         }, throwable -> {
             UiUtils.showToast(BookListActivity.this, throwable.getMessage());
         });
