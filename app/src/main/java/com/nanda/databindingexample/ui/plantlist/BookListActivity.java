@@ -75,6 +75,14 @@ public class BookListActivity extends BaseActivity implements BookListAdapter.Bo
         });
     }
 
+    @Override
+    public void onAddBook(BooksModel model) {
+        viewModel.saveBookModel(model).subscribe(() -> {
+        }, throwable -> {
+            UiUtils.showToast(BookListActivity.this, throwable.getMessage());
+        });
+    }
+
     private void updateRecyclerViews(List<BooksModel> booksModelList) {
         if (booksModelList != null && booksModelList.size() > 0) {
             tvNoData.setVisibility(View.GONE);
@@ -98,10 +106,5 @@ public class BookListActivity extends BaseActivity implements BookListAdapter.Bo
                 }
             }
         });
-    }
-
-    @Override
-    public void onAddBook(BooksModel model) {
-
     }
 }

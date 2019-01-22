@@ -3,7 +3,7 @@ package com.nanda.databindingexample.data.response.booklist;
 import com.google.gson.annotations.SerializedName;
 
 import io.realm.RealmObject;
-import io.realm.annotations.Index;
+import io.realm.annotations.PrimaryKey;
 
 public class BooksModel extends RealmObject {
 
@@ -16,7 +16,7 @@ public class BooksModel extends RealmObject {
     @SerializedName("etag")
     private String etag;
 
-    @Index
+    @PrimaryKey
     @SerializedName("id")
     private String id;
 
