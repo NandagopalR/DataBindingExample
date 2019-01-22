@@ -2,7 +2,9 @@ package com.nanda.databindingexample.data.response.booklist;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ImageLinks {
+import io.realm.RealmObject;
+
+public class ImageLinks extends RealmObject {
 
     @SerializedName("thumbnail")
     private String thumbnail;

@@ -2,9 +2,9 @@ package com.nanda.databindingexample.data.response.booklist;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+import io.realm.RealmObject;
 
-public class VolumeInfo {
+public class VolumeInfo extends RealmObject {
 
     @SerializedName("pageCount")
     private int pageCount;
@@ -47,9 +47,6 @@ public class VolumeInfo {
 
     @SerializedName("contentVersion")
     private String contentVersion;
-
-    @SerializedName("authors")
-    private List<String> authors;
 
     @SerializedName("infoLink")
     private String infoLink;
@@ -164,14 +161,6 @@ public class VolumeInfo {
 
     public String getContentVersion() {
         return contentVersion;
-    }
-
-    public void setAuthors(List<String> authors) {
-        this.authors = authors;
-    }
-
-    public List<String> getAuthors() {
-        return authors;
     }
 
     public void setInfoLink(String infoLink) {

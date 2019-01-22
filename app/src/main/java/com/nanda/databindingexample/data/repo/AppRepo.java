@@ -1,8 +1,11 @@
 package com.nanda.databindingexample.data.repo;
 
+import android.arch.lifecycle.LiveData;
+
 import com.nanda.databindingexample.app.AppConstants;
 import com.nanda.databindingexample.data.api.ApiConstants;
 import com.nanda.databindingexample.data.api.AppApi;
+import com.nanda.databindingexample.data.db.livemodels.LiveRealmResults;
 import com.nanda.databindingexample.data.response.booklist.BooksModel;
 import com.nanda.databindingexample.utils.RxJavaUtils;
 
@@ -10,15 +13,16 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import rx.Observable;
+import rx.functions.Action1;
 
 public class AppRepo {
 
     private AppApi api;
     private RealmConfiguration realmConfiguration;
-    private Realm realm;
+    private Realm appRealm;
 
     @Inject
     public AppRepo(AppApi api, RealmConfiguration realmConfiguration) {
@@ -28,7 +32,7 @@ public class AppRepo {
     }
 
     private void createRealm() {
-        realm = Realm.getInstance(realmConfiguration);
+        appRealm = Realm.getInstance(realmConfiguration);
     }
 
     public Observable<List<BooksModel>> getBooksList(String query) {
@@ -40,6 +44,23 @@ public class AppRepo {
                     }
                     return response.getBooksModel();
                 });
+    }
+
+    /*------------------------------------------DataBase-----------------------------------------------------*/
+
+    private LiveData<List<BooksModel>> getSavedBookList() {
+        LiveData<List<BooksModel>> bookModelList;
+        Realm realm = appRealm;
+        bookModelList = new LiveRealmResults<BooksModel>(realm.where(BooksModel.class).findAll());
+        return bookModelList;
+    }
+
+    private class SaveBookModelList implements Action1<List<BooksModel>> {
+
+        @Override
+        public void call(List<BooksModel> booksModelList) {
+
+        }
     }
 
 }

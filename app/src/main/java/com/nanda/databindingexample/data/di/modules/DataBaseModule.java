@@ -14,7 +14,7 @@ public class DataBaseModule {
     @Provides
     @Singleton
     RealmConfiguration providesRealmConfiguration() {
-        return new RealmConfigurationFactory().createRealmConfiguration();
+        return RealmConfigurationFactory.createRealmConfiguration();
     }
 
 }

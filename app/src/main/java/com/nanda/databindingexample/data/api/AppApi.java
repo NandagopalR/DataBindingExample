@@ -2,9 +2,9 @@ package com.nanda.databindingexample.data.api;
 
 import com.nanda.databindingexample.data.response.booklist.BooksResponse;
 
-import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import rx.Observable;
 
 public interface AppApi {
 
