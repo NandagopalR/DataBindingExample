@@ -3,6 +3,7 @@ package com.nanda.databindingexample.ui.home;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -17,7 +18,8 @@ import android.widget.TextView;
 import com.nanda.databindingexample.R;
 import com.nanda.databindingexample.base.BaseActivity;
 import com.nanda.databindingexample.data.preferences.AppPreference;
-import com.nanda.databindingexample.data.viewmodels.BookListViewModel;
+import com.nanda.databindingexample.data.viewmodels.SavedBooksViewModel;
+import com.nanda.databindingexample.ui.plantlist.BookListActivity;
 import com.nanda.databindingexample.utils.UiUtils;
 
 import javax.inject.Inject;
@@ -46,7 +48,7 @@ public class HomeActivity extends BaseActivity
     @Inject
     AppPreference appPreference;
 
-    private BookListViewModel viewModel;
+    private SavedBooksViewModel viewModel;
 
 
     @Override
@@ -64,7 +66,7 @@ public class HomeActivity extends BaseActivity
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(BookListViewModel.class);
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(SavedBooksViewModel.class);
 
         observeLoadingStatus();
         fetchBookList();
@@ -130,7 +132,7 @@ public class HomeActivity extends BaseActivity
         if (id == R.id.nav_books) {
 
         } else if (id == R.id.nav_books_list) {
-
+            startActivity(new Intent(HomeActivity.this, BookListActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
