@@ -2,13 +2,11 @@ package com.nanda.databindingexample.ui.home;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -25,6 +23,7 @@ import com.nanda.databindingexample.base.BaseActivity;
 import com.nanda.databindingexample.data.preferences.AppPreference;
 import com.nanda.databindingexample.data.response.booklist.BooksModel;
 import com.nanda.databindingexample.data.viewmodels.SavedBooksViewModel;
+import com.nanda.databindingexample.ui.home.adapter.SavedBookListAdapter;
 import com.nanda.databindingexample.ui.plantlist.BookListActivity;
 import com.nanda.databindingexample.utils.UiUtils;
 

@@ -1,4 +1,4 @@
-package com.nanda.databindingexample.ui.home;
+package com.nanda.databindingexample.ui.home.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
