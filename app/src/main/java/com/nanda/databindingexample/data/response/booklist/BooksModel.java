@@ -23,6 +23,8 @@ public class BooksModel extends RealmObject {
     @SerializedName("selfLink")
     private String selfLink;
 
+    private transient boolean isFromCreation;
+
     public void setKind(String kind) {
         this.kind = kind;
     }
@@ -61,5 +63,13 @@ public class BooksModel extends RealmObject {
 
     public String getSelfLink() {
         return selfLink;
+    }
+
+    public boolean isFromCreation() {
+        return isFromCreation;
+    }
+
+    public void setFromCreation(boolean fromCreation) {
+        isFromCreation = fromCreation;
     }
 }

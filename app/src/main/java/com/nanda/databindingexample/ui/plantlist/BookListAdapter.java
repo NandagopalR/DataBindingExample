@@ -1,39 +1,32 @@
 package com.nanda.databindingexample.ui.plantlist;
 
+import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.nanda.databindingexample.R;
 import com.nanda.databindingexample.data.response.booklist.BooksModel;
+import com.nanda.databindingexample.databinding.ItemBookBinding;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BooksViewHolder> {
 
     private List<BooksModel> booksModelList;
     private BookClickListener listener;
 
-    public BookListAdapter(BookClickListener listener) {
-        this.listener = listener;
-        booksModelList = new ArrayList<>();
+    public BookListAdapter(List<BooksModel> itemList) {
+        this.booksModelList = itemList;
     }
 
-    public void setBooksModelList(List<BooksModel> itemList) {
-        if (itemList == null) {
-            return;
-        }
-        booksModelList.clear();
-        booksModelList.addAll(itemList);
-        notifyDataSetChanged();
+    public BookListAdapter() {
+    }
+
+    public void setBookClickListener(BookClickListener bookClickListener) {
+        this.listener = bookClickListener;
     }
 
     public interface BookClickListener {
@@ -51,7 +44,9 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BooksV
     @Override
     public void onBindViewHolder(@NonNull BooksViewHolder booksViewHolder, int position) {
         BooksModel model = booksModelList.get(position);
-        booksViewHolder.bindDataToView(model);
+        ItemBookBinding binding = ((BooksViewHolder) booksViewHolder).getBinding();
+        binding.imgAdd.setVisibility(View.VISIBLE);
+        binding.setModel(model);
     }
 
     @Override
@@ -59,34 +54,45 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BooksV
         return booksModelList.size();
     }
 
-    class BooksViewHolder extends RecyclerView.ViewHolder {
+    class BooksViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @BindView(R.id.tv_title)
-        TextView tvTitle;
-        @BindView(R.id.tv_desc)
-        TextView tvDesc;
+        private ItemBookBinding binding;
 
         public BooksViewHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            binding = DataBindingUtil.bind(itemView);
+            binding.imgAdd.setVisibility(View.VISIBLE);
+            binding.imgAdd.setOnClickListener(this);
         }
 
-        public void bindDataToView(BooksModel model) {
-            if (model != null && model.getVolumeInfo() != null) {
-                tvTitle.setText(model.getVolumeInfo().getTitle());
-                tvDesc.setText(model.getVolumeInfo().getDescription());
+        ItemBookBinding getBinding() {
+            return binding;
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.img_add:
+
+                    int position = getAdapterPosition();
+                    if (position < 0)
+                        return;
+                    if (listener != null) {
+                        listener.onAddBook(booksModelList.get(position));
+                    }
+                    break;
             }
         }
 
-        @OnClick(R.id.img_add)
-        public void onViewClicked() {
-            int position = getAdapterPosition();
-            if (position < 0)
-                return;
-            if (listener != null) {
-                listener.onAddBook(booksModelList.get(position));
-            }
-        }
+//        @OnClick(R.id.img_add)
+//        public void onViewClicked() {
+//            int position = getAdapterPosition();
+//            if (position < 0)
+//                return;
+//            if (listener != null) {
+//                listener.onAddBook(booksModelList.get(position));
+//            }
+//        }
     }
 
 }

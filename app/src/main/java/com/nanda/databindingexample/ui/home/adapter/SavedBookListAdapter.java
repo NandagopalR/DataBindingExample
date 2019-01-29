@@ -1,44 +1,24 @@
 package com.nanda.databindingexample.ui.home.adapter;
 
+import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.nanda.databindingexample.R;
 import com.nanda.databindingexample.data.response.booklist.BooksModel;
+import com.nanda.databindingexample.databinding.ItemBookBinding;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class SavedBookListAdapter extends RecyclerView.Adapter<SavedBookListAdapter.BooksViewHolder> {
 
     private List<BooksModel> booksModelList;
-    private BookClickListener listener;
 
-    public SavedBookListAdapter(BookClickListener listener) {
-        this.listener = listener;
-        booksModelList = new ArrayList<>();
-    }
-
-    public void setBooksModelList(List<BooksModel> itemList) {
-        if (itemList == null) {
-            return;
-        }
-        booksModelList.clear();
-        booksModelList.addAll(itemList);
-        notifyDataSetChanged();
-    }
-
-    public interface BookClickListener {
-        void onAddBook(BooksModel model);
+    public SavedBookListAdapter(List<BooksModel> itemList) {
+        booksModelList = itemList;
     }
 
     @NonNull
@@ -52,7 +32,8 @@ public class SavedBookListAdapter extends RecyclerView.Adapter<SavedBookListAdap
     @Override
     public void onBindViewHolder(@NonNull BooksViewHolder booksViewHolder, int position) {
         BooksModel model = booksModelList.get(position);
-        booksViewHolder.bindDataToView(model);
+        ItemBookBinding binding = ((BooksViewHolder) booksViewHolder).getBinding();
+        binding.setModel(model);
     }
 
     @Override
@@ -62,34 +43,16 @@ public class SavedBookListAdapter extends RecyclerView.Adapter<SavedBookListAdap
 
     class BooksViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.tv_title)
-        TextView tvTitle;
-        @BindView(R.id.tv_desc)
-        TextView tvDesc;
-        @BindView(R.id.img_add)
-        ImageView imgAdd;
+        private ItemBookBinding binding;
 
         public BooksViewHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
-            imgAdd.setVisibility(View.GONE);
+            binding = DataBindingUtil.bind(itemView);
+            binding.imgAdd.setVisibility(View.GONE);
         }
 
-        public void bindDataToView(BooksModel model) {
-            if (model != null && model.getVolumeInfo() != null) {
-                tvTitle.setText(model.getVolumeInfo().getTitle());
-                tvDesc.setText(model.getVolumeInfo().getDescription());
-            }
-        }
-
-        @OnClick(R.id.img_add)
-        public void onViewClicked() {
-            int position = getAdapterPosition();
-            if (position < 0)
-                return;
-            if (listener != null) {
-                listener.onAddBook(booksModelList.get(position));
-            }
+        ItemBookBinding getBinding() {
+            return binding;
         }
     }
 
