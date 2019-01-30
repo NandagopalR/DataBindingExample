@@ -12,6 +12,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 
 import com.nanda.databindingexample.R;
@@ -20,8 +21,8 @@ import com.nanda.databindingexample.data.preferences.AppPreference;
 import com.nanda.databindingexample.data.response.booklist.BooksModel;
 import com.nanda.databindingexample.data.viewmodels.SavedBooksViewModel;
 import com.nanda.databindingexample.databinding.ActivityHomeBinding;
+import com.nanda.databindingexample.ui.home.adapter.SavedBookListAdapter;
 import com.nanda.databindingexample.ui.plantlist.BookListActivity;
-import com.nanda.databindingexample.utils.UiUtils;
 
 import java.util.List;
 
@@ -37,7 +38,9 @@ public class HomeActivity extends BaseActivity
     @Inject
     AppPreference appPreference;
 
+    private RecyclerView recyclerView;
     private SavedBooksViewModel viewModel;
+    private SavedBookListAdapter adapter;
 
     private ActivityHomeBinding homeBinding;
 
@@ -55,7 +58,10 @@ public class HomeActivity extends BaseActivity
         homeBinding.drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        adapter = new SavedBookListAdapter();
         homeBinding.navView.setNavigationItemSelectedListener(this);
+        recyclerView = homeBinding.includeAppBar.includeContent.recyclerview;
+        recyclerView.setAdapter(adapter);
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(SavedBooksViewModel.class);
     }
@@ -66,8 +72,6 @@ public class HomeActivity extends BaseActivity
                 .observe(this, booksModelList -> {
                     if (booksModelList != null && booksModelList.size() > 0) {
                         updateRecyclerViews(booksModelList);
-                    } else {
-                        UiUtils.showToast(HomeActivity.this, "" + booksModelList.size());
                     }
                 });
     }
@@ -76,6 +80,7 @@ public class HomeActivity extends BaseActivity
         if (booksModelList != null && booksModelList.size() > 0) {
             homeBinding.includeAppBar.includeContent.setBooks(booksModelList);
             homeBinding.executePendingBindings();
+            adapter.setBooksModelList(booksModelList);
         }
     }
 

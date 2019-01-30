@@ -11,6 +11,7 @@ import com.nanda.databindingexample.R;
 import com.nanda.databindingexample.data.response.booklist.BooksModel;
 import com.nanda.databindingexample.databinding.ItemBookBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BooksViewHolder> {
@@ -22,11 +23,18 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BooksV
         this.booksModelList = itemList;
     }
 
-    public BookListAdapter() {
+    public BookListAdapter(BookClickListener bookClickListener) {
+        this.listener = bookClickListener;
+        booksModelList = new ArrayList<>();
     }
 
-    public void setBookClickListener(BookClickListener bookClickListener) {
-        this.listener = bookClickListener;
+    public void setBooksModelList(List<BooksModel> itemList) {
+        if (itemList == null) {
+            return;
+        }
+        booksModelList.clear();
+        booksModelList.addAll(itemList);
+        notifyDataSetChanged();
     }
 
     public interface BookClickListener {
@@ -83,16 +91,6 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BooksV
                     break;
             }
         }
-
-//        @OnClick(R.id.img_add)
-//        public void onViewClicked() {
-//            int position = getAdapterPosition();
-//            if (position < 0)
-//                return;
-//            if (listener != null) {
-//                listener.onAddBook(booksModelList.get(position));
-//            }
-//        }
     }
 
 }

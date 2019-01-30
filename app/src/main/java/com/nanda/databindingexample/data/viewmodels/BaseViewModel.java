@@ -20,7 +20,7 @@ public abstract class BaseViewModel<T> extends ViewModel {
     @Inject
     AppPreference appPreference;
 
-    protected Realm appRealm= Realm.getInstance(RealmConfigurationFactory.createRealmConfiguration());
+    protected Realm appRealm = Realm.getInstance(RealmConfigurationFactory.createRealmConfiguration());
 
     protected final MutableLiveData<AppResponse<T>> response = new MutableLiveData<>();
 
@@ -32,6 +32,10 @@ public abstract class BaseViewModel<T> extends ViewModel {
 
     public MutableLiveData<AppResponse<T>> getResponse() {
         return response;
+    }
+
+    protected Realm refreshRealm() {
+        return appRealm = Realm.getInstance(RealmConfigurationFactory.createRealmConfiguration());
     }
 
 }

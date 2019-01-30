@@ -11,14 +11,24 @@ import com.nanda.databindingexample.R;
 import com.nanda.databindingexample.data.response.booklist.BooksModel;
 import com.nanda.databindingexample.databinding.ItemBookBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SavedBookListAdapter extends RecyclerView.Adapter<SavedBookListAdapter.BooksViewHolder> {
 
     private List<BooksModel> booksModelList;
 
-    public SavedBookListAdapter(List<BooksModel> itemList) {
-        booksModelList = itemList;
+    public SavedBookListAdapter() {
+        booksModelList = new ArrayList<>();
+    }
+
+    public void setBooksModelList(List<BooksModel> itemList) {
+        if (itemList == null) {
+            return;
+        }
+        booksModelList.clear();
+        booksModelList.addAll(itemList);
+        notifyDataSetChanged();
     }
 
     @NonNull

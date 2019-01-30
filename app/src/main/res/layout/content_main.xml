@@ -50,7 +50,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:load_books="@{books}"
             tools:listitem="@layout/item_book" />
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -20,6 +20,11 @@ public class SavedBooksViewModel extends BaseViewModel {
     public LiveData<List<BooksModel>> getSavedBookList() {
         LiveData<List<BooksModel>> bookModelList;
         Realm realm = appRealm;
+        if (realm != null) {
+            if (realm.isClosed()) {
+                realm = refreshRealm();
+            }
+        }
         bookModelList = new LiveRealmResults<>(realm.where(BooksModel.class).findAll());
         return bookModelList;
     }

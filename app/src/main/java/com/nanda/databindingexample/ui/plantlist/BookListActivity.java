@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 
 import com.nanda.databindingexample.R;
 import com.nanda.databindingexample.base.BaseActivity;
@@ -25,6 +26,8 @@ public class BookListActivity extends BaseActivity implements BookListAdapter.Bo
     ViewModelProvider.Factory viewModelFactory;
 
     private BookListViewModel viewModel;
+    private RecyclerView recyclerView;
+    private BookListAdapter adapter;
     private ActivityBookListBinding bookBinding;
 
     @Override
@@ -39,7 +42,10 @@ public class BookListActivity extends BaseActivity implements BookListAdapter.Bo
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(BookListViewModel.class);
 
-//        new BookListAdapter().setBookClickListener(this);
+        recyclerView = bookBinding.recyclerview;
+        adapter = new BookListAdapter(this);
+        recyclerView.setAdapter(adapter);
+
         observeLoadingStatus();
         fetchBookList();
     }
@@ -72,6 +78,7 @@ public class BookListActivity extends BaseActivity implements BookListAdapter.Bo
         if (booksModelList != null && booksModelList.size() > 0) {
             bookBinding.setBooks(booksModelList);
             bookBinding.executePendingBindings();
+            adapter.setBooksModelList(booksModelList);
         }
     }
 
