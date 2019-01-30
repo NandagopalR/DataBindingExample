@@ -36,7 +36,7 @@ public class BookListViewModel extends BaseViewModel {
 
     public Completable saveBookModel(BooksModel model) {
         return Completable.fromAction(() -> {
-            Realm realm = appRealm;
+            Realm realm = refreshRealm();
             realm.beginTransaction();
             try {
                 realm.copyToRealmOrUpdate(model);

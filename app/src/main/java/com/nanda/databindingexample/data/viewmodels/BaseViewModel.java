@@ -35,7 +35,7 @@ public abstract class BaseViewModel<T> extends ViewModel {
     }
 
     protected Realm refreshRealm() {
-        return appRealm = Realm.getInstance(RealmConfigurationFactory.createRealmConfiguration());
+        return Realm.getInstance(RealmConfigurationFactory.createRealmConfiguration());
     }
 
 }
